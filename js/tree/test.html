@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>树形数据结构中搜索节点</title>
+</head>
+<body>
+</body>
+</html>
+<script src="TreeUtil.js"></script>
+<script>
+    let searchValue = ['AUTH'];
+    let nodeList = [{
+        "key": "1000092",
+        "menuName": "权限管理",
+        "menuCode": "AUTH",
+        "menuType": "1",
+        "parentMenu": "root",
+        "pageUrl": "/auth",
+        "iconUrl": null,
+        "remark": null,
+        "subMenuList": [{
+            "key": "1000095",
+            "menuName": "用户管理列表",
+            "menuCode": "AUTH_USER_LIST",
+            "menuType": "1",
+            "parentMenu": "AUTH",
+            "pageUrl": "/auth/user/list",
+            "iconUrl": null,
+            "remark": null,
+            "subMenuList": [{
+                "key": "1000096",
+                "menuName": "用户新增",
+                "menuCode": "AUTH_USER_INSERT",
+                "menuType": "2",
+                "parentMenu": "AUTH_USER_LIST",
+                "pageUrl": "/auth/user/update",
+                "iconUrl": null,
+                "remark": null,
+                "subMenuList": null
+            }, {
+                "key": "1000106",
+                "menuName": "用户修改",
+                "menuCode": "test1",
+                "menuType": "2",
+                "parentMenu": "AUTH_USER_LIST",
+                "pageUrl": "/strsssas",
+                "iconUrl": null,
+                "remark": null,
+                "subMenuList": null
+            }]
+        }, {
+            "key": "1000107",
+            "menuName": "角色管理",
+            "menuCode": "role",
+            "menuType": "1",
+            "parentMenu": "AUTH",
+            "pageUrl": "role",
+            "iconUrl": null,
+            "remark": null,
+            "subMenuList": null
+        }]
+    }];
+    let result = new TreeUtil().getSearchTree(nodeList, searchValue);
+
+    console.log(JSON.stringify(result))
+</script>
