@@ -13,7 +13,14 @@ class TreeUtil {
     }
 
 
+    /**
+     * 获取匹配节点的树
+     * @param nodeList
+     * @param searchValue
+     * @returns {*}
+     */
     getSearchTree(nodeList, searchValue) {
+        nodeList = JSON.parse(JSON.stringify(nodeList));
         // 所以根节点搜索
         nodeList.forEach((n) => {
             this.searchEach(n, searchValue);
@@ -29,6 +36,27 @@ class TreeUtil {
         }
         return nodeList;
     }
+
+    /**
+     * 获取未匹配节点的树
+     * @param nodeList
+     * @param searchValue
+     * @returns {*}
+     */
+    getNotSearchTree(nodeList, searchValue) {
+        nodeList = JSON.parse(JSON.stringify(nodeList));
+        let allKeyValue = [];
+        this.recursionTree(nodeList, node => {
+            allKeyValue.push(node[this.key]);
+        });
+
+        let diffSearchValue = allKeyValue.filter(function (value) {
+            return allKeyValue.indexOf(value) >= 0 && searchValue.indexOf(value) <= -1;
+        });
+
+        return this.getSearchTree(nodeList, diffSearchValue);
+    }
+
 
     /**
      * 对子节点进行搜索
@@ -103,6 +131,20 @@ class TreeUtil {
     }
 
     /**
+     * 递归遍历树
+     * @param node
+     * @param callback
+     */
+    recursionTree(nodeList, callback) {
+        nodeList.forEach(node => {
+            callback(node);
+            if (this.isHasChildren(node)) {
+                this.recursionTree(node[this.children], callback);
+            }
+        });
+    }
+
+    /**
      * 非递归遍历树
      * @param node
      * @param callback
@@ -155,12 +197,7 @@ class TreeUtil {
             if (!Array.isArray(searchValue)) {
                 return keyValue !== searchValue;
             } else {
-                for (let i = 0; i < searchValue.length; i++) {
-                    if (keyValue !== searchValue[i]) {
-                        return true;
-                    }
-                }
-                return false;
+                return searchValue.indexOf(keyValue) <= -1;
             }
         }
     }

@@ -9,7 +9,6 @@
 </html>
 <script src="TreeUtil.js"></script>
 <script>
-    let searchValue = ['AUTH'];
     let nodeList = [{
         "key": "1000092",
         "menuName": "权限管理",
@@ -61,7 +60,12 @@
             "subMenuList": null
         }]
     }];
-    let result = new TreeUtil().getSearchTree(nodeList, searchValue);
 
-    console.log(JSON.stringify(result))
+    let searchList = ['role','AUTH_USER_LIST'];
+
+    let searchTree = new TreeUtil().getSearchTree(nodeList, searchList);
+    let notSearchTree = new TreeUtil().getNotSearchTree(nodeList, searchList);
+
+    console.log('searchTree=>', searchTree);
+    console.log('notSearchTree=>', notSearchTree);
 </script>
